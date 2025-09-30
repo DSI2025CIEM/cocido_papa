@@ -105,7 +105,7 @@ def coincidencia_plantillas_par(img1_src, img2_template, metodo=None, mostrar=Fa
 
 # Probar coincidencia de plantillas entre todas las imágenes adyacentes.
 if len(imagenes) > 1:
-    print("\n--- Paso intermedio : Evaluación de coincidencia de plantillas entre imágenes adyacentes ---")
+    print("\nPaso intermedio : Evaluación de coincidencia de plantillas entre imágenes adyacentes")
     similitudes = []
     umbral_advertencia = 0.4 # Umbral por debajo del cual se considera baja la similitud.
 
@@ -115,7 +115,7 @@ if len(imagenes) > 1:
         nombre_actual = rutas_imagenes_cargadas[i].split(os.sep)[-1]
         nombre_siguiente = rutas_imagenes_cargadas[i+1].split(os.sep)[-1]
 
-        print(f"Comparando '{nombre_actual}' como imagen fuente y '{nombre_siguiente}' como plantilla...")
+        print(f"Comparando '{nombre_actual}' como imagen fuente y '{nombre_siguiente}' como plantilla")
     
         similitud_val, _ = coincidencia_plantillas_par(img_actual, img_siguiente, mostrar=mostrar_intermedias)
         similitudes.append(similitud_val)
@@ -203,4 +203,4 @@ else:
     elif estado == cv2.Stitcher_ERR_CAMERA_PARAMS_ADJUST_FAIL:
         print("Falló el ajuste de parámetros de la cámara.")
 
-print("\n--- Proceso finalizado ---")
+print("\nProceso finalizado")
