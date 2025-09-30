@@ -105,7 +105,7 @@ def coincidencia_plantillas_par(img1_src, img2_template, metodo=None, mostrar=Fa
 
 # Probar coincidencia de plantillas entre todas las imágenes adyacentes.
 if len(imagenes) > 1:
-    print("\n--- PASO INTERMEDIO: Evaluación de Coincidencia de Plantillas entre imágenes adyacentes ---")
+    print("\n--- Paso intermedio : Evaluación de coincidencia de plantillas entre imágenes adyacentes ---")
     similitudes = []
     umbral_advertencia = 0.4 # Umbral por debajo del cual se considera baja la similitud.
 
@@ -122,13 +122,13 @@ if len(imagenes) > 1:
         print(f"Similitud entre '{nombre_actual}' y '{nombre_siguiente}': {similitud_val:.3f}")
 
         if similitud_val < umbral_advertencia:
-            print(f"⚠ Advertencia: La similitud ({similitud_val:.3f}) entre '{nombre_actual}' y '{nombre_siguiente}' es baja. Puede que el stitching falle para este par.")
+            print(f"Advertencia: La similitud ({similitud_val:.3f}) entre '{nombre_actual}' y '{nombre_siguiente}' es baja. Puede que el stitching falle para este par.")
 
     if similitudes:
         similitud_promedio = np.mean(similitudes)
         print(f"\nSimilitud promedio entre pares adyacentes: {similitud_promedio:.3f}")
         if similitud_promedio < umbral_advertencia:
-            print("⚠ Advertencia general: La similitud promedio entre las imágenes es baja. El stitching podría tener dificultades.")
+            print(" Advertencia general: La similitud promedio entre las imágenes es baja. El stitching podría tener dificultades.")
     else:
         print("No se encontraron pares para comparar la similitud.")
 else:
