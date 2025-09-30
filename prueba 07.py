@@ -3,9 +3,7 @@
 # Fecha: 30/09/2025.
 # Ixchel Rmz. Gro.
 
-# Tema: pruebas de cocido de imagenes (Coincidencia de plantillas openCV).
-# Fecha: 24/09/2025.
-# Ixchel Rmz. Gro.
+
 
 import os
 import cv2
@@ -64,7 +62,7 @@ for i, ruta in enumerate(rutas_imagenes_cargadas, start=1):
     print(f" {i}. {ruta}")
 print(f"\nTotal de imágenes válidas: {len(rutas_imagenes_cargadas)}")
 
-# --- Inicio del Paso de Coincidencia de Plantillas Generalizado ---
+#Inicio del Paso de Coincidencia de Plantillas Generalizado
 #Paso: Coincidencia de plantillas:
 def coincidencia_plantillas_par(img1_src, img2_template, metodo=None, mostrar=False): # Cambié el nombre para ser más específico
     """
@@ -105,11 +103,11 @@ def coincidencia_plantillas_par(img1_src, img2_template, metodo=None, mostrar=Fa
 
     return similitud_valor, top_left
 
-# Probar coincidencia de plantillas entre todas las imágenes adyacentes
+# Probar coincidencia de plantillas entre todas las imágenes adyacentes.
 if len(imagenes) > 1:
     print("\n--- PASO INTERMEDIO: Evaluación de Coincidencia de Plantillas entre imágenes adyacentes ---")
     similitudes = []
-    umbral_advertencia = 0.4 # Umbral por debajo del cual se considera baja la similitud
+    umbral_advertencia = 0.4 # Umbral por debajo del cual se considera baja la similitud.
 
     for i in range(len(imagenes) - 1):
         img_actual = imagenes[i]
@@ -118,44 +116,7 @@ if len(imagenes) > 1:
         nombre_siguiente = rutas_imagenes_cargadas[i+1].split(os.sep)[-1]
 
         print(f"Comparando '{nombre_actual}' como imagen fuente y '{nombre_siguiente}' como plantilla...")
-        # Aquí la plantilla es img_siguiente y la imagen fuente es img_actual,
-        # lo que significa que img_siguiente (la imagen más pequeña)
-        # se busca dentro de img_actual. Esto podría necesitar ajustarse
-        # dependiendo de cómo se superponen tus imágenes.
-        # Si la superposición es que img_siguiente se "monta" sobre img_actual,
-        # entonces img_actual debería ser la fuente y img_siguiente la plantilla.
-        # Si son más como que se busca la parte de img_actual que se superpone con img_siguiente
-        # dentro de img_siguiente (que es más pequeña), entonces el orden sería img_siguiente, img_actual.
-        # Para el stitching, generalmente buscamos características de una imagen en la otra.
-        # Para template matching en este contexto, lo más común es buscar la imagen adyacente
-        # (que debería tener una sección común) dentro de la imagen anterior o viceversa.
-        # Vamos a buscar la imagen Siguiente (más pequeña si fue redimensionada) dentro de la Actual.
-        # NOTA: Para template matching simple, una imagen debe ser 'subimagen' de la otra.
-        # Si las imágenes solo se superponen, esta técnica no es ideal para 'encontrar' la superposición,
-        # pero puede dar un indicador de cuán similares son las regiones superpuestas.
-
-        # Para una verificación de similitud general, podrías buscar la imagen más pequeña
-        # dentro de la más grande, o simplemente usar ambas en el orden en que se espera que se superpongan.
-        # Para propósitos de este "cocido", el stitcher manejará la superposición.
-        # Aquí, simplemente estamos verificando la similitud de la imagen siguiente como si fuera una plantilla
-        # dentro de la imagen actual (o la parte superpuesta).
-
-        # Una aproximación más robusta para evaluar la "coincidencia" para stitching
-        # podría ser tomar la imagen actual, y buscar la imagen siguiente como plantilla.
-        # Sin embargo, si la imagen siguiente es completa y la actual también, la plantilla
-        # matching buscará la IMAGEN COMPLETA siguiente dentro de la IMAGEN COMPLETA actual.
-        # Esto solo funcionará si una imagen está *completamente contenida* en la otra.
-
-        # Para evaluar la *similitud de superposición* para el stitching,
-        # necesitaríamos primero estimar la región de superposición.
-        # El Template Matching es más para "encontrar un objeto".
-        # Si quieres una métrica de "cuán bien se superponen",
-        # sería mejor usar los mismos FeaturesFinder que usa el Stitcher y ver cuántos matches encuentra.
-
-        # Por ahora, mantengamos la lógica de buscar `img_siguiente` (como plantilla) dentro de `img_actual` (como fuente)
-        # Esto implica que esperamos que `img_siguiente` sea una "subimagen" de `img_actual` o que haya una región
-        # suficientemente grande de `img_siguiente` que sea similar a una región de `img_actual`.
-
+    
         similitud_val, _ = coincidencia_plantillas_par(img_actual, img_siguiente, mostrar=mostrar_intermedias)
         similitudes.append(similitud_val)
         print(f"Similitud entre '{nombre_actual}' y '{nombre_siguiente}': {similitud_val:.3f}")
